@@ -69,4 +69,12 @@ class ProjectController extends Controller
     {
         //
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function owner(Project $project)
+    {
+        return inertia('projects/Owner');
+    }
 }
