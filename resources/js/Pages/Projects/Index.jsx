@@ -1,6 +1,6 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import clsx from "clsx";
@@ -16,6 +16,8 @@ export default function index({ auth, projects, queryParams = null }) {
         } else {
             delete queryParams[name];
         }
+
+        router.get(route("project.index"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -64,7 +66,8 @@ export default function index({ auth, projects, queryParams = null }) {
                                         <th className="px-3 py-4"></th>
                                         <th className="px-3 py-4">
                                             <TextInput
-                                                className="w-full"
+                                                className="w-full text-black"
+                                                defaultValue={queryParams.name}
                                                 placeholder="Project Name"
                                                 onBlur={(e) =>
                                                     searchFieldChange(
@@ -78,6 +81,9 @@ export default function index({ auth, projects, queryParams = null }) {
                                         </th>
                                         <th className="">
                                             <SelectInput
+                                                defaultValue={
+                                                    queryParams.status
+                                                }
                                                 className="w-full"
                                                 onChange={(e) =>
                                                     searchFieldChange(
@@ -86,9 +92,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                                     )
                                                 }
                                             >
-                                                <option value="">
-                                                    Select Status
-                                                </option>
+                                                <option>Select Status</option>
                                                 <option value="completed">
                                                     Completed
                                                 </option>
