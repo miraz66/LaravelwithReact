@@ -4,8 +4,26 @@ import { Head, Link } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import clsx from "clsx";
+import TextInput from "@/Components/TextInput";
+import SelectInput from "@/Components/SelectInput";
 
-export default function index({ auth, projects }) {
+export default function index({ auth, projects, queryParams = null }) {
+    queryParams = queryParams || {};
+
+    const searchFieldChange = (name, value) => {
+        if (value) {
+            queryParams[name] = value;
+        } else {
+            delete queryParams[name];
+        }
+    };
+
+    const onKeyPress = (name, e) => {
+        if (e.key !== "Enter") return;
+
+        searchFieldChange(name, e.target.value);
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -28,7 +46,9 @@ export default function index({ auth, projects }) {
                                         <th className="px-3 py-4">ID</th>
                                         <th className="px-3 py-4">Image</th>
                                         <th className="px-3 py-4">Name</th>
-                                        <th className="px-3 py-4">Status</th>
+                                        <th className="px-3 py-4 text-center">
+                                            Status
+                                        </th>
                                         <th className="px-3 py-4">
                                             Create Date
                                         </th>
@@ -39,6 +59,43 @@ export default function index({ auth, projects }) {
                                         </th>
                                     </tr>
                                 </thead>
+
+                                <thead className="text-sm text-white uppercase bg-gray-50 dark:bg-gray-700 dark:to-gray-400 border-b-2 border-gray-500">
+                                    <tr className="text-nowrap">
+                                        <th className="px-3 py-4"></th>
+                                        <th className="px-3 py-4"></th>
+                                        <th className="px-3 py-4">
+                                            <TextInput
+                                                className="w-full"
+                                                placeholder="Project Name"
+                                                onBlur={(e) =>
+                                                    searchFieldChange(
+                                                        e.target.value
+                                                    )
+                                                }
+                                                onKeyPress={(e) =>
+                                                    onKeyPress("name", e)
+                                                }
+                                            />
+                                        </th>
+                                        <th className="px-3 py-4">
+                                            <SelectInput
+                                                className="w-full"
+                                                onChange={(e) =>
+                                                    searchFieldChange(
+                                                        "status",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                        </th>
+                                        <th className="px-3 py-4"></th>
+                                        <th className="px-3 py-4"></th>
+                                        <th className="px-3 py-4"></th>
+                                        <th className="px-3 py-4"></th>
+                                    </tr>
+                                </thead>
+
                                 <tbody>
                                     {projects.data.map((project, index) => (
                                         <tr
