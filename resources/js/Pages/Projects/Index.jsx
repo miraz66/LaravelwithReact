@@ -2,6 +2,8 @@ import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
+import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
+import clsx from "clsx";
 
 export default function index({ auth, projects }) {
     return (
@@ -38,8 +40,11 @@ export default function index({ auth, projects }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {projects.data.map((project) => (
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    {projects.data.map((project, index) => (
+                                        <tr
+                                            key={index}
+                                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                        >
                                             <td className="px-3 py-2 text-center">
                                                 {project.id}
                                             </td>
@@ -55,7 +60,20 @@ export default function index({ auth, projects }) {
                                             </td>
 
                                             <td className="px-3 py-2">
-                                                {project.status}
+                                                <span
+                                                    className={clsx(
+                                                        "px-3 p-1 text-white rounded-sm",
+                                                        PROJECT_STATUS_CLASS_MAP[
+                                                            project.status
+                                                        ]
+                                                    )}
+                                                >
+                                                    {
+                                                        PROJECT_STATUS_TEXT_MAP[
+                                                            project.status
+                                                        ]
+                                                    }
+                                                </span>
                                             </td>
 
                                             <td className="px-3 py-2">
