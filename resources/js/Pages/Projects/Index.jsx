@@ -46,9 +46,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                         <th className="px-3 py-4">ID</th>
                                         <th className="px-3 py-4">Image</th>
                                         <th className="px-3 py-4">Name</th>
-                                        <th className="px-3 py-4 text-center">
-                                            Status
-                                        </th>
+                                        <th className="px-3 py-4">Status</th>
                                         <th className="px-3 py-4">
                                             Create Date
                                         </th>
@@ -78,7 +76,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                                 }
                                             />
                                         </th>
-                                        <th className="px-3 py-4">
+                                        <th className="">
                                             <SelectInput
                                                 className="w-full"
                                                 onChange={(e) =>
@@ -87,7 +85,20 @@ export default function index({ auth, projects, queryParams = null }) {
                                                         e.target.value
                                                     )
                                                 }
-                                            />
+                                            >
+                                                <option value="">
+                                                    Select Status
+                                                </option>
+                                                <option value="completed">
+                                                    Completed
+                                                </option>
+                                                <option value="in_progress">
+                                                    In Progress
+                                                </option>
+                                                <option value="pending">
+                                                    Pending
+                                                </option>
+                                            </SelectInput>
                                         </th>
                                         <th className="px-3 py-4"></th>
                                         <th className="px-3 py-4"></th>
