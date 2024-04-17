@@ -222,8 +222,15 @@ export default function index({ auth, projects, queryParams = null }) {
                                                         style={{ width: 120 }}
                                                     />
                                                 </td>
-                                                <td className="px-3 py-2">
-                                                    {project.name}
+                                                <td className="px-3 py-2 underline">
+                                                    <Link
+                                                        href={route(
+                                                            "project.show",
+                                                            project.id
+                                                        )}
+                                                    >
+                                                        {project.name}
+                                                    </Link>
                                                 </td>
 
                                                 <td className="px-3 py-2">

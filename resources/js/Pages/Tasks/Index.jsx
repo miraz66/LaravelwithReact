@@ -170,7 +170,7 @@ export default function index({ auth, tasks, queryParams = null }) {
                                                     }
                                                 />
                                             </th>
-                                            <th className="">
+                                            <th>
                                                 <SelectInput
                                                     defaultValue={
                                                         queryParams.status
