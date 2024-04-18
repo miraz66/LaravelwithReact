@@ -2,8 +2,9 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import clsx from "clsx";
+import TaskTable from "../Tasks/TaskTable";
 
-export default function Show({ auth, project }) {
+export default function Show({ auth, project, tasks, queryParams = null }) {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title={`Project ${project.name}`} />
@@ -91,10 +92,17 @@ export default function Show({ auth, project }) {
                         </div>
                     </div>
                 </div>
-
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-4">
+            </div>
+            <div className="pb-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-4 ">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-400 bg-gray-800"></div>
+                        <div className="p-6 text-gray-400 bg-gray-800">
+                            <TaskTable
+                                queryParams={queryParams}
+                                tasks={tasks}
+                                routeName={("project", project.id)}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
