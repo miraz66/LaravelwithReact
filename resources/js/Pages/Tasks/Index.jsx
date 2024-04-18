@@ -46,7 +46,7 @@ export default function index({ auth, tasks, queryParams = null }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Task
+                    Tasks
                 </h2>
             }
         >

@@ -210,7 +210,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                         {projects.data.map((project, index) => (
                                             <tr
                                                 key={index}
-                                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                                className="bg-white dark:text-gray-400 border-b dark:bg-gray-800 dark:border-gray-700"
                                             >
                                                 <td className="px-3 py-2 text-center">
                                                     {project.id}
@@ -222,7 +222,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                                         style={{ width: 120 }}
                                                     />
                                                 </td>
-                                                <td className="px-3 py-2 underline">
+                                                <td className="px-3 py-2 hover:underline hover:text-gray-300 ease-in-out duration-200">
                                                     <Link
                                                         href={route(
                                                             "project.show",
