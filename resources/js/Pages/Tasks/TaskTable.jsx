@@ -7,7 +7,12 @@ import clsx from "clsx";
 
 import { TASK_STATUS_TEXT_MAP, TASK_STATUS_CLASS_MAP } from "@/constants";
 
-export default function TaskTable({ tasks, queryParams, routeName }) {
+export default function TaskTable({
+    tasks,
+    queryParams,
+    routeName,
+    routeId = null,
+}) {
     queryParams = queryParams || {};
 
     const searchFieldChange = (name, value) => {
@@ -17,7 +22,7 @@ export default function TaskTable({ tasks, queryParams, routeName }) {
             delete queryParams[name];
         }
 
-        router.get(route(routeName), queryParams);
+        router.get(route(routeName, routeId), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -37,8 +42,7 @@ export default function TaskTable({ tasks, queryParams, routeName }) {
             queryParams.sort_field = name;
             queryParams.sort_direction = "asc";
         }
-        console.log(routeName, queryParams);
-        router.get(route(routeName), queryParams);
+        router.get(route(routeName, routeId), queryParams);
     };
 
     return (

@@ -100,7 +100,8 @@ export default function Show({ auth, project, tasks, queryParams = null }) {
                             <TaskTable
                                 queryParams={queryParams}
                                 tasks={tasks}
-                                routeName={("project", project.id)}
+                                routeId={project.id}
+                                routeName={"project.show"}
                             />
                         </div>
                     </div>
