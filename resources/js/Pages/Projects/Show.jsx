@@ -102,6 +102,7 @@ export default function Show({ auth, project, tasks, queryParams = null }) {
                                 tasks={tasks}
                                 routeId={project.id}
                                 routeName={"project.show"}
+                                hideProjectColumn={true}
                             />
                         </div>
                     </div>

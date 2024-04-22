@@ -12,6 +12,7 @@ export default function TaskTable({
     queryParams,
     routeName,
     routeId = null,
+    hideProjectColumn = false,
 }) {
     queryParams = queryParams || {};
 
@@ -63,6 +64,14 @@ export default function TaskTable({
                             <TableHeading name={"image"} sortable={false}>
                                 image
                             </TableHeading>
+                            {!hideProjectColumn && (
+                                <TableHeading
+                                    name={"Project Name"}
+                                    sortable={false}
+                                >
+                                    Project Name
+                                </TableHeading>
+                            )}
                             <TableHeading
                                 name={"name"}
                                 sortable={true}
@@ -116,6 +125,10 @@ export default function TaskTable({
                         <tr className="text-nowrap">
                             <th className="px-3 py-4"></th>
                             <th className="px-3 py-4"></th>
+                            {!hideProjectColumn && (
+                                <th className="px-3 py-4"></th>
+                            )}
+
                             <th className="px-3 py-4">
                                 <TextInput
                                     className="w-full text-black"
@@ -169,6 +182,11 @@ export default function TaskTable({
                                         style={{ width: 120 }}
                                     />
                                 </td>
+                                {!hideProjectColumn && (
+                                    <td className="px-3 py-2">
+                                        {task.project.name}
+                                    </td>
+                                )}
                                 <td className="px-3 py-2">{task.name}</td>
 
                                 <td className="px-3 py-2">

@@ -1,6 +1,16 @@
-export default function InputLabel({ value, className = '', children, ...props }) {
+import clsx from "clsx";
+
+export default function InputLabel({
+    value,
+    className = "",
+    children,
+    ...props
+}) {
     return (
-        <label {...props} className={`block font-medium text-sm text-gray-700 ` + className}>
+        <label
+            {...props}
+            className={clsx("block text-white text-lg font-medium", className)}
+        >
             {value ? value : children}
         </label>
     );
