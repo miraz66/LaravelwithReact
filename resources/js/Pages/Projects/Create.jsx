@@ -53,11 +53,10 @@ export default function Create({ auth }) {
                                         id="project_image_path"
                                         name="image"
                                         type="file"
-                                        value={data.image}
                                         isFocused="true"
                                         className="mt-1 py-1.5 px-2 block w-full bg-gray-400 border-black"
                                         onChange={(e) =>
-                                            setData("image", e.target.value)
+                                            setData("image", e.target.files[0])
                                         }
                                     />
                                     <InputError

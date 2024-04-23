@@ -55,12 +55,17 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('project_images', 'public'); // Store in the 'public' disk
+            $data['image_path'] = $imagePath; // Add image path to the data array
+        }
+
         $data["created_by"] = Auth::id();
         $data["updated_by"] = Auth::id();
 
         Project::create($data);
         return to_route('project.index')
-            ->with("Success", "Project created successfully");
+            ->with("success", "Project created successfully");
     }
 
     /**
@@ -112,7 +117,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $name = $project->name;
+        $project->delete();
+
+        return to_route('project.index')->with("success", "Project \" $name \" was deleted");
     }
 
     /**

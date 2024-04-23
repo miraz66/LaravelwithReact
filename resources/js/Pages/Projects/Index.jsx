@@ -8,7 +8,7 @@ import TextInput from "@/Components/TextInput";
 import SelectInput from "@/Components/SelectInput";
 import TableHeading from "@/Components/TableHeading";
 
-export default function index({ auth, projects, queryParams = null }) {
+export default function index({ auth, projects, queryParams = null, success }) {
     queryParams = queryParams || {};
 
     const searchFieldChange = (name, value) => {
@@ -41,6 +41,13 @@ export default function index({ auth, projects, queryParams = null }) {
         router.get(route("project.index"), queryParams);
     };
 
+    const deleteProject = (id) => {
+        if (!window.confirm("Are you sure you want to delete this project"))
+            return;
+
+        router.delete(route("project.destroy", id));
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -59,6 +66,17 @@ export default function index({ auth, projects, queryParams = null }) {
             }
         >
             <Head title="Projects" />
+            {success && (
+                <div
+                    x-data="{ show: true }"
+                    x-init="setTimeout(() => show = false, 3000)"
+                    x-show="show"
+                    className="text-emerald-500 text-center pt-5"
+                >
+                    {success}
+                </div>
+            )}
+
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-4">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -226,7 +244,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                                 <td className="px-3 py-2">
                                                     <img
                                                         src={project.image_path}
-                                                        alt="fake image"
+                                                        alt="Project image"
                                                         style={{ width: 120 }}
                                                     />
                                                 </td>
@@ -270,7 +288,7 @@ export default function index({ auth, projects, queryParams = null }) {
                                                     {project.updated_by.name}
                                                 </td>
 
-                                                <td className="px-3 py-2">
+                                                <td className="px-3 py-2 flex gap-1">
                                                     <Link
                                                         href={route(
                                                             "project.edit",
@@ -280,15 +298,16 @@ export default function index({ auth, projects, queryParams = null }) {
                                                     >
                                                         Edit
                                                     </Link>
-                                                    <Link
-                                                        href={route(
-                                                            "project.destroy",
-                                                            project.id
-                                                        )}
+                                                    <button
+                                                        onClick={() =>
+                                                            deleteProject(
+                                                                project.id
+                                                            )
+                                                        }
                                                         className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                                                     >
                                                         Delete
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}
