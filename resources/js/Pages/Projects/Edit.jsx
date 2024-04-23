@@ -7,13 +7,14 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, Link } from "@inertiajs/react";
 
-export default function Create({ auth }) {
+export default function Create({ auth, project }) {
     const { data, setData, post, errors, reset } = useForm({
         image: "",
-        name: "",
-        status: "",
-        due_date: "",
-        description: "",
+        image_path: project.image_path || "",
+        name: project.name || "",
+        status: project.status || "",
+        due_date: project.due_date || "",
+        description: project.description || "",
     });
 
     const onSubmit = (e) => {
@@ -27,7 +28,7 @@ export default function Create({ auth }) {
             header={
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Add New Project.
+                        Edit Your {project.name} Project.
                     </h2>
                 </div>
             }
@@ -38,7 +39,7 @@ export default function Create({ auth }) {
                     <div className="bg-white overflow-hidden dark:bg-gray-700 shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-300">
                             <h1 className="text-center font-medium text-3xl py-2 transform">
-                                Add New Project.
+                                Edit Your Project.
                             </h1>
                             <form className="space-y-6" onSubmit={onSubmit}>
                                 {/*  Create a new project from image */}
@@ -63,6 +64,14 @@ export default function Create({ auth }) {
                                         message={errors.image}
                                         className="mt-2"
                                     />
+
+                                    {data.image_path && (
+                                        <img
+                                            className="w-52 m-4"
+                                            src={data.image_path}
+                                            alt="edit image"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Create a new Project from Name */}
@@ -105,7 +114,7 @@ export default function Create({ auth }) {
                                         placeholder="Project Due Date"
                                         isFocused="true"
                                         value={data.due_date}
-                                        className="mt-1 block text-gray-900 w-full "
+                                        className="mt-1 block text-gray-900 w-full"
                                         onChange={(e) =>
                                             setData("due_date", e.target.value)
                                         }

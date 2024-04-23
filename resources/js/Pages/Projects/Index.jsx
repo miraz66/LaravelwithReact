@@ -288,7 +288,7 @@ export default function index({ auth, projects, queryParams = null, success }) {
                                                     {project.updated_by.name}
                                                 </td>
 
-                                                <td className="px-3 py-2 flex gap-1">
+                                                <td className="px-3 py-2 flex items-center justify-center gap-1">
                                                     <Link
                                                         href={route(
                                                             "project.edit",
