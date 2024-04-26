@@ -8,7 +8,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth, project }) {
-    const { data, setData, post, errors, reset } = useForm({
+    const { data, setData, put, errors, reset } = useForm({
         image: "",
         image_path: project.image_path || "",
         name: project.name || "",
@@ -19,7 +19,8 @@ export default function Create({ auth, project }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("project.store"));
+
+        put(route("project.update", project.id));
     };
 
     return (
