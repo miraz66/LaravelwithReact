@@ -100,12 +100,7 @@ export default function index({ auth, users, queryParams = null, success }) {
                                             >
                                                 id
                                             </TableHeading>
-                                            <TableHeading
-                                                name={"image"}
-                                                sortable={false}
-                                            >
-                                                image
-                                            </TableHeading>
+
                                             <TableHeading
                                                 name={"name"}
                                                 sortable={true}
@@ -121,7 +116,7 @@ export default function index({ auth, users, queryParams = null, success }) {
                                             </TableHeading>
 
                                             <TableHeading
-                                                name={"status"}
+                                                name={"email"}
                                                 sortable={true}
                                                 sort_field={
                                                     queryParams.sort_field
@@ -131,7 +126,7 @@ export default function index({ auth, users, queryParams = null, success }) {
                                                 }
                                                 sortChanged={sortChange}
                                             >
-                                                status
+                                                Email
                                             </TableHeading>
 
                                             <TableHeading
@@ -145,34 +140,14 @@ export default function index({ auth, users, queryParams = null, success }) {
                                                 }
                                                 sortChanged={sortChange}
                                             >
-                                                created Date
-                                            </TableHeading>
-
-                                            <TableHeading
-                                                name={"due_date"}
-                                                sortable={true}
-                                                sort_field={
-                                                    queryParams.sort_field
-                                                }
-                                                sort_direction={
-                                                    queryParams.sort_direction
-                                                }
-                                                sortChanged={sortChange}
-                                            >
-                                                due Date
-                                            </TableHeading>
-                                            <TableHeading
-                                                name={"created_by"}
-                                                sortable={false}
-                                            >
-                                                created By
+                                                Created Date
                                             </TableHeading>
 
                                             <TableHeading
                                                 name={"actions"}
                                                 sortable={false}
                                             >
-                                                actions
+                                                Actions
                                             </TableHeading>
                                         </tr>
                                     </thead>
@@ -180,7 +155,7 @@ export default function index({ auth, users, queryParams = null, success }) {
                                     <thead className="text-sm text-white uppercase bg-gray-50 dark:bg-gray-700 dark:to-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
                                             <th className="px-3 py-4"></th>
-                                            <th className="px-3 py-4"></th>
+
                                             <th className="px-3 py-4">
                                                 <TextInput
                                                     className="w-full text-black"
@@ -198,35 +173,26 @@ export default function index({ auth, users, queryParams = null, success }) {
                                                     }
                                                 />
                                             </th>
-                                            <th className="">
-                                                <SelectInput
+
+                                            <th className="px-3 py-4">
+                                                <TextInput
+                                                    className="w-full text-black"
                                                     defaultValue={
-                                                        queryParams.status
+                                                        queryParams.email
                                                     }
-                                                    className="w-full"
-                                                    onChange={(e) =>
+                                                    placeholder="User Email"
+                                                    onBlur={(e) =>
                                                         searchFieldChange(
-                                                            "status",
+                                                            "email",
                                                             e.target.value
                                                         )
                                                     }
-                                                >
-                                                    <option>
-                                                        Select Status
-                                                    </option>
-                                                    <option value="completed">
-                                                        Completed
-                                                    </option>
-                                                    <option value="in_progress">
-                                                        In Progress
-                                                    </option>
-                                                    <option value="pending">
-                                                        Pending
-                                                    </option>
-                                                </SelectInput>
+                                                    onKeyPress={(e) =>
+                                                        onKeyPress("email", e)
+                                                    }
+                                                />
                                             </th>
-                                            <th className="px-3 py-4"></th>
-                                            <th className="px-3 py-4"></th>
+
                                             <th className="px-3 py-4"></th>
                                             <th className="px-3 py-4"></th>
                                         </tr>
@@ -241,51 +207,17 @@ export default function index({ auth, users, queryParams = null, success }) {
                                                 <td className="px-3 py-2 text-center">
                                                     {user.id}
                                                 </td>
-                                                <td className="px-3 py-2">
-                                                    <img
-                                                        src={user.image_path}
-                                                        alt="User image"
-                                                        style={{ width: 120 }}
-                                                    />
-                                                </td>
-                                                <td className="px-3 py-2 hover:underline hover:text-gray-300 ease-in-out duration-200">
-                                                    <Link
-                                                        href={route(
-                                                            "user.show",
-                                                            user.id
-                                                        )}
-                                                    >
-                                                        {user.name}
-                                                    </Link>
+
+                                                <td className="px-3 py-2 text-gray-100 text-nowrap">
+                                                    {user.name}
                                                 </td>
 
                                                 <td className="px-3 py-2">
-                                                    <span
-                                                        className={clsx(
-                                                            "px-3 p-1 text-white rounded-sm",
-                                                            USER_STATUS_CLASS_MAP[
-                                                                user.status
-                                                            ]
-                                                        )}
-                                                    >
-                                                        {
-                                                            USER_STATUS_TEXT_MAP[
-                                                                user.status
-                                                            ]
-                                                        }
-                                                    </span>
+                                                    {user.email}
                                                 </td>
 
                                                 <td className="px-3 py-2">
                                                     {user.created_at}
-                                                </td>
-
-                                                <td className="px-3 py-2">
-                                                    {user.due_date}
-                                                </td>
-
-                                                <td className="px-3 py-2">
-                                                    {user.updated_by.name}
                                                 </td>
 
                                                 <td className="px-3 py-2 flex items-center justify-center gap-1">
