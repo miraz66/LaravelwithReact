@@ -2,10 +2,7 @@ import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
-import { USER_STATUS_TEXT_MAP, USER_STATUS_CLASS_MAP } from "@/constants";
-import clsx from "clsx";
 import TextInput from "@/Components/TextInput";
-import SelectInput from "@/Components/SelectInput";
 import TableHeading from "@/Components/TableHeading";
 
 export default function index({ auth, users, queryParams = null, success }) {
@@ -146,6 +143,7 @@ export default function index({ auth, users, queryParams = null, success }) {
                                             <TableHeading
                                                 name={"actions"}
                                                 sortable={false}
+                                                className="text-end"
                                             >
                                                 Actions
                                             </TableHeading>

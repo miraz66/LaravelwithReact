@@ -15,12 +15,20 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // Define the time zone for Dhaka
+        $dhakaTimeZone = 'Asia/Dhaka';
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'created_at' => (new Carbon($this->created_at))->format('Y-m-d'),
-            'updated_at' => (new Carbon($this->updated_at))->format('Y-m-d'),
+            // Format dates to Y-m-d H:i:s with AM/PM and set to time zone
+            'created_at' => Carbon::parse($this->created_at)
+                ->setTimezone($dhakaTimeZone)
+                ->format('Y-m-d, h:i:s A'),
+            'updated_at' => Carbon::parse($this->updated_at)
+                ->setTimezone($dhakaTimeZone)
+                ->format('Y-m-d, h:i:s A'),
         ];
     }
 }

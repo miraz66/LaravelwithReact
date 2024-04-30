@@ -1,23 +1,22 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import SecondaryButton from "@/Components/SecondaryButton";
-import SelectInput from "@/Components/SelectInput";
-import TextAreaInput from "@/Components/TextAreaInput";
 import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth }) {
     const { data, setData, post, errors, reset } = useForm({
-        image: "",
         name: "",
-        status: "",
-        due_date: "",
-        description: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        console.log(data);
         post(route("user.store"));
     };
 
@@ -41,31 +40,7 @@ export default function Create({ auth }) {
                                 Add New User.
                             </h1>
                             <form className="space-y-6" onSubmit={onSubmit}>
-                                {/*  Create a new user from image */}
-                                <div>
-                                    <InputLabel
-                                        className="text-white text-lg font-medium"
-                                        htmlFor="user_image_path"
-                                        value="User Image"
-                                    />
-
-                                    <TextInput
-                                        id="user_image_path"
-                                        name="image"
-                                        type="file"
-                                        isFocused="true"
-                                        className="mt-1 py-1.5 px-2 block w-full bg-gray-400 border-black"
-                                        onChange={(e) =>
-                                            setData("image", e.target.files[0])
-                                        }
-                                    />
-                                    <InputError
-                                        message={errors.image}
-                                        className="mt-2"
-                                    />
-                                </div>
-
-                                {/* Create a new User from Name */}
+                                {/* Create a new User from User Name */}
                                 <div>
                                     <InputLabel
                                         htmlFor="name"
@@ -91,90 +66,80 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
-                                {/* Create a new User from Due Date */}
+                                {/* Create a new User from email */}
+
+                                <div>
+                                    <InputLabel htmlFor="email" value="Email" />
+
+                                    <TextInput
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Email"
+                                        value={data.email}
+                                        className="mt-1 block w-full text-gray-900"
+                                        autoComplete="email"
+                                        onChange={(e) =>
+                                            setData("email", e.target.value)
+                                        }
+                                    />
+                                    <InputError
+                                        message={errors.email}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                {/* Create a new User from password */}
                                 <div>
                                     <InputLabel
-                                        htmlFor="due_date"
-                                        value="User Due Date"
+                                        htmlFor="password"
+                                        value="Password"
                                     />
 
                                     <TextInput
-                                        id="due_date"
-                                        name="due_date"
-                                        type="date"
-                                        placeholder="User Due Date"
-                                        isFocused="true"
-                                        value={data.due_date}
-                                        className="mt-1 block text-gray-900 w-full "
-                                        onChange={(e) =>
-                                            setData("due_date", e.target.value)
-                                        }
-                                    />
-                                    <InputError
-                                        message={errors.due_date}
-                                        className="mt-2"
-                                    />
-                                </div>
-
-                                {/* Create a new User from Status */}
-                                <div>
-                                    <InputLabel
-                                        htmlFor="status"
-                                        value="User Status"
-                                    />
-
-                                    <SelectInput
-                                        id="status"
-                                        name="status"
-                                        type="text"
-                                        placeholder="User Status"
-                                        isFocused="true"
-                                        value={data.status}
-                                        className="mt-1 block w-full py-2"
-                                        onChange={(e) =>
-                                            setData("status", e.target.value)
-                                        }
-                                    >
-                                        <option value="">Select Status</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="in_progress">
-                                            In Progress
-                                        </option>
-                                        <option value="completed">
-                                            Completed
-                                        </option>
-                                    </SelectInput>
-                                    <InputError
-                                        message={errors.status}
-                                        className="mt-2"
-                                    />
-                                </div>
-
-                                {/* Create a new User from Description */}
-                                <div>
-                                    <InputLabel
-                                        htmlFor="description"
-                                        value="User Description"
-                                    />
-
-                                    <TextAreaInput
-                                        id="description"
-                                        name="description"
-                                        type="text"
-                                        rows="06"
-                                        placeholder="User Description"
-                                        isFocused="true"
-                                        value={data.description}
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        placeholder="password"
+                                        value={data.password}
                                         className="mt-1 block w-full text-gray-900"
+                                        autoComplete="password"
+                                        onChange={(e) =>
+                                            setData("password", e.target.value)
+                                        }
+                                    />
+
+                                    <InputError
+                                        message={errors.password}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                {/* Create a new User from password_confirmation */}
+                                <div>
+                                    <InputLabel
+                                        htmlFor="password_confirmation"
+                                        value="password_confirmation"
+                                    />
+
+                                    <TextInput
+                                        id="password_confirmation"
+                                        type="password"
+                                        name="password_confirmation"
+                                        placeholder="Confirm Password"
+                                        value={data.password_confirmation}
+                                        className="mt-1 block w-full text-gray-900"
+                                        autoComplete="password_confirmation"
                                         onChange={(e) =>
                                             setData(
-                                                "description",
+                                                "password_confirmation",
                                                 e.target.value
                                             )
                                         }
                                     />
+
                                     <InputError
-                                        message={errors.description}
+                                        message={errors.password_confirmation}
                                         className="mt-2"
                                     />
                                 </div>
