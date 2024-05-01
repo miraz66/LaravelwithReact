@@ -7,7 +7,7 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, Link } from "@inertiajs/react";
 
-export default function Create({ auth }) {
+export default function Create({ auth, projects, users }) {
     const { data, setData, post, errors, reset } = useForm({
         image: "",
         name: "",
@@ -62,10 +62,15 @@ export default function Create({ auth }) {
                                             )
                                         }
                                     >
-                                        <option value="">
-                                            Select Project ID
-                                        </option>
-                                        <option value="">TODO</option>
+                                        <option value="">Select Project</option>
+                                        {projects.data.map((project) => (
+                                            <option
+                                                key={project.id}
+                                                value={project.id}
+                                            >
+                                                {project.name}
+                                            </option>
+                                        ))}
                                     </SelectInput>
                                     <InputError
                                         message={errors.project_id}
@@ -202,7 +207,15 @@ export default function Create({ auth }) {
                                         }
                                     >
                                         <option value="">Select User</option>
-                                        <option value="low">TODO</option>
+
+                                        {users.data.map((user) => (
+                                            <option
+                                                key={user.id}
+                                                value={user.id}
+                                            >
+                                                {user.name}
+                                            </option>
+                                        ))}
                                     </SelectInput>
                                     <InputError
                                         message={errors.assigned_user_id}

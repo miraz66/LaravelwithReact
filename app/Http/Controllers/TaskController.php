@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Project;
 use App\Http\Resources\TaskResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTaskRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\ProjectResource;
+use App\Http\Resources\UserResource;
 
 class TaskController extends Controller
 {
@@ -43,7 +47,13 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return inertia('Tasks/Create');
+        $projects = Project::query()->orderBy('name', 'asc')->get()->all();
+        $users = User::all();
+        
+        return inertia('Tasks/Create', [
+            'projects' => ProjectResource::collection($projects),
+            'users' => UserResource::collection($users),
+        ]);
     }
 
     /**
