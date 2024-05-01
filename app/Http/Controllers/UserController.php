@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return inertia('User/Edit', ['user' => new UserResource($user)]);
     }
 
     /**
@@ -80,7 +80,18 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        $password = $data["password"] ?? null;
+        if ($password) {
+            $data["password"] = bcrypt($password);
+        } else {
+            unset($data["password"]);
+        }
+
+        $user->update($data);
+
+        return to_route('user.index')
+            ->with("success", "User updated successfully");
     }
 
     /**
@@ -88,6 +99,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $name = $user->name;
+        $user->delete();
+
+        return to_route('user.index')->with("success", "Project \" $name \" was deleted");
     }
 }

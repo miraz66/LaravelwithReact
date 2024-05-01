@@ -9,12 +9,10 @@ import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth, user }) {
     const { data, setData, post, errors, reset } = useForm({
-        image: "",
-        image_path: user.image_path || "",
         name: user.name || "",
-        status: user.status || "",
-        due_date: user.due_date || "",
-        description: user.description || "",
+        email: user.email || "",
+        password: user.password || "",
+        password_confirmation: user.password_confirmation || "",
         _method: "PUT",
     });
 
@@ -71,7 +69,6 @@ export default function Create({ auth, user }) {
                                 </div>
 
                                 {/* Create a new User from email */}
-
                                 <div>
                                     <InputLabel htmlFor="email" value="Email" />
 
@@ -152,13 +149,13 @@ export default function Create({ auth, user }) {
                                 <div className="flex justify-end gap-5">
                                     <Link
                                         // href={route("user.index")}
-                                        className="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        className="inline-flex items-center px-8 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Cancel
                                     </Link>
                                     <SecondaryButton
                                         type="submit"
-                                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-500"
+                                        className="hover:bg-gray-300 px-20 py-3"
                                     >
                                         Submit
                                     </SecondaryButton>

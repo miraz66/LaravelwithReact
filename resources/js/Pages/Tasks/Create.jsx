@@ -18,7 +18,7 @@ export default function Create({ auth }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        post(route("project.store"));
+        post(route("task.store"));
     };
 
     return (
@@ -27,30 +27,30 @@ export default function Create({ auth }) {
             header={
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Add New Project.
+                        Add New Task.
                     </h2>
                 </div>
             }
         >
-            <Head title="Add New Project" />
+            <Head title="Add New Task" />
             <div className="py-12 dark:bg-gray-800 min-h-screen">
                 <div className="max-w-4xl mx-auto sm:px-6 lg:px-4 ">
                     <div className="bg-white overflow-hidden dark:bg-gray-700 shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-300">
                             <h1 className="text-center font-medium text-3xl py-2 transform">
-                                Add New Project.
+                                Add New Task.
                             </h1>
                             <form className="space-y-6" onSubmit={onSubmit}>
-                                {/*  Create a new project from image */}
+                                {/*  Create a new task from image */}
                                 <div>
                                     <InputLabel
                                         className="text-white text-lg font-medium"
-                                        htmlFor="project_image_path"
-                                        value="Project Image"
+                                        htmlFor="task_image_path"
+                                        value="Task Image"
                                     />
 
                                     <TextInput
-                                        id="project_image_path"
+                                        id="task_image_path"
                                         name="image"
                                         type="file"
                                         isFocused="true"
@@ -65,18 +65,18 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
-                                {/* Create a new Project from Name */}
+                                {/* Create a new Task from Name */}
                                 <div>
                                     <InputLabel
                                         htmlFor="name"
-                                        value="Project Name"
+                                        value="Task Name"
                                     />
 
                                     <TextInput
                                         id="name"
                                         name="Name"
                                         type="text"
-                                        placeholder="Project Name"
+                                        placeholder="Task Name"
                                         value={data.name}
                                         isFocused="true"
                                         className="mt-1 block w-full text-gray-900"
@@ -91,18 +91,18 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
-                                {/* Create a new Project from Due Date */}
+                                {/* Create a new Task from Due Date */}
                                 <div>
                                     <InputLabel
                                         htmlFor="due_date"
-                                        value="Project Due Date"
+                                        value="Task Due Date"
                                     />
 
                                     <TextInput
                                         id="due_date"
                                         name="due_date"
                                         type="date"
-                                        placeholder="Project Due Date"
+                                        placeholder="Task Due Date"
                                         isFocused="true"
                                         value={data.due_date}
                                         className="mt-1 block text-gray-900 w-full "
@@ -116,18 +116,18 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
-                                {/* Create a new Project from Status */}
+                                {/* Create a new Task from Status */}
                                 <div>
                                     <InputLabel
                                         htmlFor="status"
-                                        value="Project Status"
+                                        value="Task Status"
                                     />
 
                                     <SelectInput
                                         id="status"
                                         name="status"
                                         type="text"
-                                        placeholder="Project Status"
+                                        placeholder="Task Status"
                                         isFocused="true"
                                         value={data.status}
                                         className="mt-1 block w-full py-2"
@@ -150,11 +150,11 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
-                                {/* Create a new Project from Description */}
+                                {/* Create a new Task from Description */}
                                 <div>
                                     <InputLabel
                                         htmlFor="description"
-                                        value="Project Description"
+                                        value="Task Description"
                                     />
 
                                     <TextAreaInput
@@ -162,7 +162,7 @@ export default function Create({ auth }) {
                                         name="description"
                                         type="text"
                                         rows="06"
-                                        placeholder="Project Description"
+                                        placeholder="Task Description"
                                         isFocused="true"
                                         value={data.description}
                                         className="mt-1 block w-full text-gray-900"
@@ -182,7 +182,7 @@ export default function Create({ auth }) {
                                 {/* Submit or Cancel Button */}
                                 <div className="flex justify-end gap-5">
                                     <Link
-                                        // href={route("project.index")}
+                                        // href={route("task.index")}
                                         className="inline-flex items-center px-8 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Cancel
