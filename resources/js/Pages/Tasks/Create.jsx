@@ -43,6 +43,36 @@ export default function Create({ auth }) {
                                 Add New Task.
                             </h1>
                             <form className="space-y-6" onSubmit={onSubmit}>
+                                {/* Create a new Task from Project Id */}
+                                <div>
+                                    <InputLabel
+                                        htmlFor="task_project_id"
+                                        value="Project"
+                                    />
+
+                                    <SelectInput
+                                        id="task_project_id"
+                                        name="project_id"
+                                        value={data.project_id}
+                                        className="mt-1 block w-full py-2"
+                                        onChange={(e) =>
+                                            setData(
+                                                "project_id",
+                                                e.target.value
+                                            )
+                                        }
+                                    >
+                                        <option value="">
+                                            Select Project ID
+                                        </option>
+                                        <option value="">TODO</option>
+                                    </SelectInput>
+                                    <InputError
+                                        message={errors.project_id}
+                                        className="mt-2"
+                                    />
+                                </div>
+
                                 {/*  Create a new task from image */}
                                 <div>
                                     <InputLabel
@@ -148,34 +178,6 @@ export default function Create({ auth }) {
                                     </SelectInput>
                                     <InputError
                                         message={errors.status}
-                                        className="mt-2"
-                                    />
-                                </div>
-
-                                {/* Create a new Task from priority */}
-                                <div>
-                                    <InputLabel
-                                        htmlFor="task_project_id"
-                                        value="Project"
-                                    />
-
-                                    <SelectInput
-                                        id="task_project_id"
-                                        name="project_id"
-                                        value={data.project_id}
-                                        className="mt-1 block w-full py-2"
-                                        onChange={(e) =>
-                                            setData(
-                                                "project_id",
-                                                e.target.value
-                                            )
-                                        }
-                                    >
-                                        <option value="">Select Project</option>
-                                        <option value="">TODO</option>
-                                    </SelectInput>
-                                    <InputError
-                                        message={errors.project_id}
                                         className="mt-2"
                                     />
                                 </div>
