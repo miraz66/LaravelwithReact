@@ -7,20 +7,21 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, Link } from "@inertiajs/react";
 
-export default function Create({ auth }) {
+export default function Create({ auth, task }) {
     const { data, setData, post, errors, reset } = useForm({
         image: "",
-        name: "",
-        status: "",
-        due_date: "",
-        description: "",
+        image_path: task.image_path || "",
+        name: task.name || "",
+        status: task.status || "",
+        due_date: task.due_date || "",
+        description: task.description || "",
+        _method: "PUT",
     });
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(data);
-        post(route("task.store"));
+        post(route("task.update", task.id));
     };
 
     return (
@@ -29,7 +30,7 @@ export default function Create({ auth }) {
             header={
                 <div className="flex justify-between items-center">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Add New Task.
+                        Edit Your {task.name} Task.
                     </h2>
                 </div>
             }
@@ -40,7 +41,7 @@ export default function Create({ auth }) {
                     <div className="bg-white overflow-hidden dark:bg-gray-700 shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-300">
                             <h1 className="text-center font-medium text-3xl py-2 transform">
-                                Add New Task.
+                                Edit Your Task.
                             </h1>
                             <form className="space-y-6" onSubmit={onSubmit}>
                                 {/*  Create a new task from image */}
@@ -65,6 +66,14 @@ export default function Create({ auth }) {
                                         message={errors.image}
                                         className="mt-2"
                                     />
+
+                                    {data.image_path && (
+                                        <img
+                                            className="w-52 m-4"
+                                            src={data.image_path}
+                                            alt="edit image"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Create a new Task from Name */}
@@ -107,7 +116,7 @@ export default function Create({ auth }) {
                                         placeholder="Task Due Date"
                                         isFocused="true"
                                         value={data.due_date}
-                                        className="mt-1 block text-gray-900 w-full "
+                                        className="mt-1 block text-gray-900 w-full"
                                         onChange={(e) =>
                                             setData("due_date", e.target.value)
                                         }
@@ -185,13 +194,13 @@ export default function Create({ auth }) {
                                 <div className="flex justify-end gap-5">
                                     <Link
                                         // href={route("task.index")}
-                                        className="inline-flex items-center px-8 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        className="inline-flex items-center px-6 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Cancel
                                     </Link>
                                     <SecondaryButton
                                         type="submit"
-                                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-500 px-20 py-3"
+                                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-500 px-16 py-3"
                                     >
                                         Submit
                                     </SecondaryButton>

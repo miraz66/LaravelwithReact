@@ -184,7 +184,11 @@ export default function TaskTable({
                                 </td>
                                 {!hideProjectColumn && (
                                     <td className="px-3 py-2">
-                                        {task.project.name}
+                                        <Link
+                                            href={route("task.show", task.id)}
+                                        >
+                                            {task.project.name}
+                                        </Link>
                                     </td>
                                 )}
                                 <td className="px-3 py-2">{task.name}</td>
