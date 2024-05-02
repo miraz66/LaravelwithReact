@@ -9,17 +9,19 @@ import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth, task }) {
     const { data, setData, post, errors, reset } = useForm({
-        image_path: task.image_path || "",
-        project_id: task.project_id || "",
-        image: task.image || "",
-        name: task.name || "",
-        due_date: task.due_date || "",
-        status: task.status || "",
-        priority: task.priority || "",
-        assigned_user_id: task.assigned_user_id || "",
-        description: task.description || "",
+        image_path: task.data.image_path || "",
+        project_id: task.data.project_id || "",
+        image: task.data.image || "",
+        name: task.data.name || "",
+        due_date: task.data.due_date || "",
+        status: task.data.status || "",
+        priority: task.data.priority || "",
+        assigned_user_id: task.data.assigned_user_id || "",
+        description: task.data.description || "",
         _method: "PUT",
     });
+
+    console.log(data.project_id);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -67,19 +69,27 @@ export default function Create({ auth, task }) {
                                         }
                                     >
                                         <option value="">Select Project</option>
-                                        {projects.data.map((project) => (
+                                        {/* {projects.data.map((project) => (
                                             <option
                                                 key={project.id}
                                                 value={project.id}
                                             >
                                                 {project.name}
                                             </option>
-                                        ))}
+                                        ))} */}
                                     </SelectInput>
                                     <InputError
                                         message={errors.project_id}
                                         className="mt-2"
                                     />
+
+                                    {data.image_path && (
+                                        <img
+                                            className="w-52 m-4"
+                                            src={data.image_path}
+                                            alt="edit image"
+                                        />
+                                    )}
                                 </div>
 
                                 {/*  Create a new task from image */}
@@ -239,14 +249,14 @@ export default function Create({ auth, task }) {
                                     >
                                         <option value="">Select User</option>
 
-                                        {users.data.map((user) => (
+                                        {/* {users.data.map((user) => (
                                             <option
                                                 key={user.id}
                                                 value={user.id}
                                             >
                                                 {user.name}
                                             </option>
-                                        ))}
+                                        ))} */}
                                     </SelectInput>
                                     <InputError
                                         message={errors.assigned_user_id}
