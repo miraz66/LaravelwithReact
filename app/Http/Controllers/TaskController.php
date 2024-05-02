@@ -72,7 +72,7 @@ class TaskController extends Controller
         $data["updated_by"] = Auth::id();
 
         Task::create($data);
-        return to_route('tasks.index')
+        return to_route('task.index')
             ->with("success", "Task created successfully");
     }
 

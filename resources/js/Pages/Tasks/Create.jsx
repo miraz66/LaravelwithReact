@@ -9,10 +9,13 @@ import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth, projects, users }) {
     const { data, setData, post, errors, reset } = useForm({
+        project_id: "",
         image: "",
         name: "",
-        status: "",
         due_date: "",
+        status: "",
+        priority: "",
+        assigned_user_id: "",
         description: "",
     });
 
@@ -90,7 +93,6 @@ export default function Create({ auth, projects, users }) {
                                         id="task_image_path"
                                         name="image"
                                         type="file"
-                                        isFocused="true"
                                         className="mt-1 py-1.5 px-2 block w-full bg-gray-400 border-black"
                                         onChange={(e) =>
                                             setData("image", e.target.files[0])
@@ -115,7 +117,6 @@ export default function Create({ auth, projects, users }) {
                                         type="text"
                                         placeholder="Task Name"
                                         value={data.name}
-                                        isFocused="true"
                                         className="mt-1 block w-full text-gray-900"
                                         autoComplete="name"
                                         onChange={(e) =>
@@ -140,7 +141,6 @@ export default function Create({ auth, projects, users }) {
                                         name="due_date"
                                         type="date"
                                         placeholder="Task Due Date"
-                                        isFocused="true"
                                         value={data.due_date}
                                         className="mt-1 block text-gray-900 w-full "
                                         onChange={(e) =>
@@ -165,7 +165,6 @@ export default function Create({ auth, projects, users }) {
                                         name="status"
                                         type="text"
                                         placeholder="Task Status"
-                                        isFocused="true"
                                         value={data.status}
                                         className="mt-1 block w-full py-2"
                                         onChange={(e) =>
@@ -183,6 +182,37 @@ export default function Create({ auth, projects, users }) {
                                     </SelectInput>
                                     <InputError
                                         message={errors.status}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                {/* Create a new Task from Priority */}
+                                <div>
+                                    <InputLabel
+                                        htmlFor="priority"
+                                        value="Task Priority"
+                                    />
+
+                                    <SelectInput
+                                        id="priority"
+                                        name="priority"
+                                        type="text"
+                                        placeholder="Task priority"
+                                        value={data.priority}
+                                        className="mt-1 block w-full py-2"
+                                        onChange={(e) =>
+                                            setData("priority", e.target.value)
+                                        }
+                                    >
+                                        <option value="">
+                                            Select Priority
+                                        </option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </SelectInput>
+                                    <InputError
+                                        message={errors.priority}
                                         className="mt-2"
                                     />
                                 </div>

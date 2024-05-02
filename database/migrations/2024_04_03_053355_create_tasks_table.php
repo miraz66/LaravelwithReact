@@ -14,10 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->string('image_path')->nullable();
             $table->string('status');
             $table->string('priority');
             $table->string('due_date')->nullable();
-            $table->string('image_path')->nullable();
             $table->foreignId('assigned_user_id')->constrained('users');
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
