@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Project::factory()
-            ->count(30)
-            ->hasTasks(30)
+            ->count(3)
+            ->hasTasks(3)
             ->create();
     }
 }
