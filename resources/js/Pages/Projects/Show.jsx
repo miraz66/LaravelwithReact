@@ -5,6 +5,7 @@ import clsx from "clsx";
 import TaskTable from "../Tasks/TaskTable";
 
 export default function Show({ auth, project, tasks, queryParams = null }) {
+    console.log(tasks);
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title={`Project ${project.name}`} />

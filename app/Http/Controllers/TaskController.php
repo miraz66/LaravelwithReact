@@ -125,6 +125,7 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $data = $request->validated();
+
         $data["updated_by"] = Auth::id();
 
         // Check if there is a new image in the request

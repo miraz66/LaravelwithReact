@@ -9,19 +9,19 @@ import { Head, useForm, Link } from "@inertiajs/react";
 
 export default function Create({ auth, task, projects, users }) {
     const { data, setData, post, errors, reset } = useForm({
-        image_path: task.data.image_path || "",
-        project_id: task.data.project_id || "",
-        image: task.data.image || "",
-        name: task.data.name || "",
-        due_date: task.data.due_date || "",
-        status: task.data.status || "",
-        priority: task.data.priority || "",
-        assigned_user_id: task.data.assigned_user_id || "",
-        description: task.data.description || "",
+        image_path: task.image_path || "",
+        project_id: task.project_id || "",
+        image: "",
+        name: task.name || "",
+        due_date: task.due_date || "",
+        status: task.status || "",
+        priority: task.priority || "",
+        assigned_user_id: task.assigned_user_id || "",
+        description: task.description || "",
         _method: "PUT",
     });
 
-    console.log(task);
+    console.log(task.id);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -82,14 +82,6 @@ export default function Create({ auth, task, projects, users }) {
                                         message={errors.project_id}
                                         className="mt-2"
                                     />
-
-                                    {data.image_path && (
-                                        <img
-                                            className="w-52 m-4"
-                                            src={data.image_path}
-                                            alt="edit image"
-                                        />
-                                    )}
                                 </div>
 
                                 {/*  Create a new task from image */}
@@ -113,6 +105,14 @@ export default function Create({ auth, task, projects, users }) {
                                         message={errors.image}
                                         className="mt-2"
                                     />
+
+                                    {data.image_path && (
+                                        <img
+                                            className="w-52 m-4"
+                                            src={data.image_path}
+                                            alt="edit image"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Create a new Task from Name */}
@@ -296,7 +296,7 @@ export default function Create({ auth, task, projects, users }) {
                                 {/* Submit or Cancel Button */}
                                 <div className="flex justify-end gap-5">
                                     <Link
-                                        // href={route("task.index")}
+                                        href={route("task.index")}
                                         className="inline-flex items-center px-8 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
                                     >
                                         Cancel

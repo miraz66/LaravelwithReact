@@ -170,7 +170,7 @@ export default function TaskTable({
                         {tasks.data.map((task, index) => (
                             <tr
                                 key={index}
-                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-nowrap"
                             >
                                 <td className="px-3 py-2 text-center">
                                     {task.id}
