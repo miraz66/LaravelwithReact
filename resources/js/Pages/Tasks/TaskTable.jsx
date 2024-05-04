@@ -46,6 +46,13 @@ export default function TaskTable({
         router.get(route(routeName, routeId), queryParams);
     };
 
+    const deleteTask = (id) => {
+        if (!window.confirm("Are you sure you want to delete this project"))
+            return;
+
+        router.delete(route("task.destroy", id));
+    };
+
     return (
         <>
             <div className="overflow-auto">
@@ -219,12 +226,12 @@ export default function TaskTable({
                                     >
                                         Edit
                                     </Link>
-                                    <Link
-                                        href={route("task.destroy", task.id)}
+                                    <button
+                                        onClick={() => deleteTask(task.id)}
                                         className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                                     >
                                         Delete
-                                    </Link>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
