@@ -1,10 +1,10 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { TASK_STATUS_TEXT_MAP, TASK_STATUS_CLASS_MAP } from "@/constants";
 import clsx from "clsx";
-import TaskTable from "../Tasks/TaskTable";
+// import TaskTable from "../Tasks/TaskTable";
 
-export default function Show({ auth, task, tasks, queryParams = null }) {
+export default function Show({ auth, task }) {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title={`Task ${task.name}`} />
@@ -27,7 +27,7 @@ export default function Show({ auth, task, tasks, queryParams = null }) {
                                         <p>{task.id}</p>
                                     </div>
                                     <div>
-                                        <label className="text-lg font-bold">
+                                        <label className="text-lg font-bold block">
                                             Task Name
                                         </label>
                                         <p>{task.name}</p>
@@ -53,6 +53,12 @@ export default function Show({ auth, task, tasks, queryParams = null }) {
                                         </label>
                                         <p>{task.created_by.name}</p>
                                     </div>
+                                    <div>
+                                        <label className="text-lg font-bold">
+                                            Priority
+                                        </label>
+                                        <p>{task.priority}</p>
+                                    </div>
                                 </div>
                                 <div className="space-y-4">
                                     <div>
@@ -72,6 +78,20 @@ export default function Show({ auth, task, tasks, queryParams = null }) {
                                         </p>
                                     </div>
                                     <div>
+                                        <label className="text-lg font-bold block">
+                                            Project Name
+                                        </label>
+                                        <Link
+                                            href={route(
+                                                "project.show",
+                                                task.project.id
+                                            )}
+                                            className="hover:underline"
+                                        >
+                                            {task.name}
+                                        </Link>
+                                    </div>
+                                    <div>
                                         <label className="text-lg font-bold">
                                             Updated By
                                         </label>
@@ -89,24 +109,6 @@ export default function Show({ auth, task, tasks, queryParams = null }) {
                     </div>
                 </div>
             </div>
-
-            {tasks.data.length !== 0 ? (
-                <div className="pb-12">
-                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-4 ">
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6 text-gray-400 bg-gray-800">
-                                <TaskTable
-                                    queryParams={queryParams}
-                                    tasks={tasks}
-                                    routeId={task.id}
-                                    routeName={"task.show"}
-                                    hideTaskColumn={true}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ) : null}
         </AuthenticatedLayout>
     );
 }

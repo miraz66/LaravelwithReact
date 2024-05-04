@@ -32,9 +32,7 @@ class TaskController extends Controller
             $query->where('status', request('status'));
         }
 
-        $tasks = $query->orderBy($sortField, $sortDirection)
-            ->paginate(10)
-            ->onEachSide(1);
+        $tasks = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1);
 
         return inertia('Tasks/Index', [
             'tasks' => TaskResource::collection($tasks),
@@ -49,7 +47,7 @@ class TaskController extends Controller
     {
         $projects = Project::query()->orderBy('name', 'asc')->get()->all();
         $users = User::query()->orderBy('name', 'asc')->get()->all();
-        
+
         return inertia('Tasks/Create', [
             'projects' => ProjectResource::collection($projects),
             'users' => UserResource::collection($users),
@@ -68,12 +66,11 @@ class TaskController extends Controller
             $data['image_path'] = $imagePath; // Add image path to the data array
         }
 
-        $data["created_by"] = Auth::id();
-        $data["updated_by"] = Auth::id();
+        $data['created_by'] = Auth::id();
+        $data['updated_by'] = Auth::id();
 
         Task::create($data);
-        return to_route('task.index')
-            ->with("success", "Task created successfully");
+        return to_route('task.index')->with('success', 'Task created successfully');
     }
 
     /**
@@ -81,26 +78,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $query = $task->tasks();
-        $sortField = request('sort_field', 'created_at');
-        $sortDirection = request('sort_direction', 'desc');
-
-        if (request('name')) {
-            $query->where('name', 'like', '%' . request('name') . '%');
-        }
-
-        if (request('status')) {
-            $query->where('status', request('status'));
-        }
-
-        $tasks = $query->orderBy($sortField, $sortDirection)
-            ->paginate(10)
-            ->onEachSide(1);
-
         return inertia('Tasks/Show', [
             'task' => new TaskResource($task),
-            'tasks' => TaskResource::collection($tasks),
-            'queryParams' => request()->query() ?: null,
         ]);
     }
 
@@ -113,10 +92,10 @@ class TaskController extends Controller
         $users = User::all();
 
         return inertia('Tasks/Edit', [
-        'task' => new TaskResource($task),
-        'projects' => ProjectResource::collection($projects),
-        'users' => UserResource::collection($users),
-    ]);
+            'task' => new TaskResource($task),
+            'projects' => ProjectResource::collection($projects),
+            'users' => UserResource::collection($users),
+        ]);
     }
 
     /**
@@ -126,7 +105,7 @@ class TaskController extends Controller
     {
         $data = $request->validated();
 
-        $data["updated_by"] = Auth::id();
+        $data['updated_by'] = Auth::id();
 
         // Check if there is a new image in the request
         if ($request->hasFile('image')) {
@@ -143,8 +122,7 @@ class TaskController extends Controller
         // Update the task with the new data
         $task->update($data);
 
-        return to_route('task.index')
-            ->with("success", "Task updated successfully");
+        return to_route('task.index')->with('success', 'Task updated successfully');
     }
 
     /**
@@ -157,9 +135,30 @@ class TaskController extends Controller
 
         if ($task->image_path) {
             Storage::disk('public')->deleteDirectory(dirname($task->image_path));
-
         }
 
-        return to_route('task.index')->with("success", "Task \" $name \" was deleted");
+        return to_route('task.index')->with('success', "Task \" $name \" was deleted");
+    }
+
+    public function myTasks()
+    {
+        $query = Task::query();
+        $sortField = request('sort_field', 'created_at');
+        $sortDirection = request('sort_direction', 'desc');
+
+        if (request('name')) {
+            $query->where('name', 'like', '%' . request('name') . '%');
+        }
+
+        if (request('status')) {
+            $query->where('status', request('status'));
+        }
+
+        $tasks = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1);
+
+        return inertia('Tasks/Index', [
+            'tasks' => TaskResource::collection($tasks),
+            'queryParams' => request()->query() ?: null,
+        ]);
     }
 }
