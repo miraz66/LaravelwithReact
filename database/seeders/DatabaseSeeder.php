@@ -20,12 +20,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Miraz',
             'email' => 'miraz@example.com',
             'password' => '123.qweA',
-            'email_verified_at' => time()
+            'email_verified_at' => time(),
         ]);
 
-        Project::factory()
-            ->count(3)
-            ->hasTasks(3)
-            ->create();
+        Project::factory()->count(3)->hasTasks(3)->create();
     }
 }

@@ -144,6 +144,11 @@ export default function Create({ auth }) {
                                     />
                                 </div>
 
+                                <p>
+                                    mirajulislam0509@gmail.com,
+                                    plm@246800#QAZ+"MNBVCXZ&asdfghjkl"(0509)
+                                </p>
+
                                 {/* Submit or Cancel Button */}
                                 <div className="flex justify-end gap-5">
                                     <Link
@@ -154,7 +159,7 @@ export default function Create({ auth }) {
                                     </Link>
                                     <SecondaryButton
                                         type="submit"
-                                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-500"
+                                        className="bg-emerald-600 border-emerald-600 hover:bg-emerald-500 px-20 py-3"
                                     >
                                         Submit
                                     </SecondaryButton>

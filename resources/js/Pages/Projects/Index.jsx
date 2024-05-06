@@ -243,6 +243,7 @@ export default function index({ auth, projects, queryParams = null, success }) {
                                                 </td>
                                                 <td className="px-3 py-2">
                                                     <img
+                                                        className="rounded"
                                                         src={project.image_path}
                                                         alt="Project image"
                                                         style={{ width: 120 }}
@@ -288,26 +289,28 @@ export default function index({ auth, projects, queryParams = null, success }) {
                                                     {project.updated_by.name}
                                                 </td>
 
-                                                <td className="px-3 py-2 flex items-center justify-center gap-1">
-                                                    <Link
-                                                        href={route(
-                                                            "project.edit",
-                                                            project.id
-                                                        )}
-                                                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
-                                                    >
-                                                        Edit
-                                                    </Link>
-                                                    <button
-                                                        onClick={() =>
-                                                            deleteProject(
+                                                <td className="px-3 py-2">
+                                                    <div className="flex items-center justify-center gap-1">
+                                                        <Link
+                                                            href={route(
+                                                                "project.edit",
                                                                 project.id
-                                                            )
-                                                        }
-                                                        className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
-                                                    >
-                                                        Delete
-                                                    </button>
+                                                            )}
+                                                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            onClick={() =>
+                                                                deleteProject(
+                                                                    project.id
+                                                                )
+                                                            }
+                                                            className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}
