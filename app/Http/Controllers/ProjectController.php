@@ -149,12 +149,4 @@ class ProjectController extends Controller
 
         return to_route('project.index')->with("success", "Project \"$name\" was deleted");
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function owner(Project $project)
-    {
-        return inertia('projects/Owner');
-    }
 }
