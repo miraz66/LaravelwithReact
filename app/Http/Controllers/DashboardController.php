@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $activeTasks = Task::query()
             ->whereIn('status', ['pending', 'in_progress'])
             ->where('assigned_user_id', $user->id)
-            ->paginate(10)
+            ->paginate(15)
             ->onEachSide(1);
         $activeTasks = TaskResource::collection($activeTasks);
 

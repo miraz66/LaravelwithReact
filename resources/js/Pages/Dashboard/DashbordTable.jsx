@@ -1,4 +1,4 @@
-// import Pagination from "@/Components/Pagination";
+import Pagination from "@/Components/Pagination";
 import clsx from "clsx";
 import { TASK_STATUS_TEXT_MAP, TASK_STATUS_CLASS_MAP } from "@/constants";
 
@@ -52,7 +52,7 @@ export default function DashboardTable({ activeTasks }) {
                     </tbody>
                 </table>
             </div>
-            {/* <Pagination links={activeTasks.meta.links} /> */}
+            <Pagination links={activeTasks.meta.links} />
         </>
     );
 }

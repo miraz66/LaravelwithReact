@@ -54,7 +54,7 @@ export default function Dashboard({
                             </div>
                         </div>
                     </div>
-                    <div className="mt-20 overflow-hidden shadow-md shadow-gray-400 sm:rounded-lg">
+                    <div className="mt-20 overflow-hidden">
                         <h1 className="text-4xl p-6 bg-gray-200 font-bold text-gray-700 tracking-tight">
                             My Active Tasks
                         </h1>
