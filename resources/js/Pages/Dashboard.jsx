@@ -19,6 +19,9 @@ export default function Dashboard({ auth }) {
                         <div className="p-6 text-gray-900">
                             You're logged in!
                         </div>
+                        <div className="p-6 text-gray-900">
+                            You're logged in!
+                        </div>
                     </div>
                 </div>
             </div>
